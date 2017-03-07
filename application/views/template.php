@@ -31,12 +31,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button-->
-                            <label for="sel1">Select list:</label>
-                            <select class="form-control" id="sel1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <label for="sel1">Driver:</label>
+                            <select class="form-control" id="sel1" onchange="this.form.submit()">
+                                <option value="ModelMysqli" <?php if ($driver === "ModelMysqli") echo "selected"?>>Mysqli</option>
+                                <option value="ModelPdo" <?php if ($driver === "ModelPdo") echo "selected"?>>Pdo</option>
+                                <option value="ModelAdodb" <?php if ($driver === "ModelAdodb") echo "selected"?>>Adodb</option>
+                                <option value="ModelOdbc" <?php if ($driver === "ModelOdbc") echo "selected"?>>Odbc</option>
+                                <option value="ModelOracle" <?php if ($driver === "ModelOracle") echo "selected"?>>Oracle</option>
                             </select>
                         </form>
                     </div>
