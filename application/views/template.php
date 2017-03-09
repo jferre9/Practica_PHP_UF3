@@ -26,19 +26,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Home</a></li>
                         </ul>
-                        <form class="navbar-form navbar-left">
+                        <form class="navbar-form navbar-left" method="post" action="<?php echo site_url()."/welcome/driver"?>">
                             <!--div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button-->
-                            <label for="sel1">Driver:</label>
-                            <select class="form-control" id="sel1" onchange="this.form.submit()">
+                            <label for="sel1" style="color: white">Driver:</label>
+                            <select class="form-control" id="sel1" name="driver" onchange="this.form.submit()">
                                 <option value="ModelMysqli" <?php if ($driver === "ModelMysqli") echo "selected"?>>Mysqli</option>
                                 <option value="ModelPdo" <?php if ($driver === "ModelPdo") echo "selected"?>>Pdo</option>
                                 <option value="ModelAdodb" <?php if ($driver === "ModelAdodb") echo "selected"?>>Adodb</option>
                                 <option value="ModelOdbc" <?php if ($driver === "ModelOdbc") echo "selected"?>>Odbc</option>
                                 <option value="ModelOracle" <?php if ($driver === "ModelOracle") echo "selected"?>>Oracle</option>
                             </select>
+                            <input type="hidden" name="accio" value="<?php echo $this->router->method ?>">
                         </form>
                     </div>
                 </div>

@@ -2,63 +2,61 @@
 
 class ModelMysqli extends CI_Model {
 
-    private static $connexio = null;
     private $conn;
-
-    private static function getConnexio() {
-        if (ModelMysqli::$connexio == null) {
-            ModelMysqli::$connexio = new mysqli('127.0.0.1', 'root', '', 'practica_php_uf3');
-            if (ModelMysqli::$connexio->connect_error) {
-                die('Connect Error (' . ModelMysqli::$connexio->connect_errno . ') ' . ModelMysqli::$connexio->connect_error);
-            }
-            ModelMysqli::$connexio->set_charset("utf8");
-        }
-        return ModelMysqli::$connexio;
-    }
 
     public function __construct() {
         // Call the CI_Model constructor
         parent::__construct();
-        $this->conn = ModelMysqli::getConnexio();
+        $this->conn = new mysqli('127.0.0.1', 'root', '', 'practica_php_uf3');
+        if ($this->conn->connect_error) {
+            die('Connect Error (' . $this->conn->connect_errno . ') ' . $this->conn->connect_error);
+        }
+        $this->conn->set_charset("utf8");
     }
 
     public function getDepartaments() {
         $departaments = array();
         $result = $this->conn->query("SELECT * FROM departament");
         while (($row = $result->fetch_assoc())) {
-            array_push($departaments,$row);
+            array_push($departaments, $row);
         }
         return $departaments;
     }
-    
+
     public function getDepartament($id) {
-        
+        $stmt = $this->conn->prepare("Select * FROM departament WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc())
+        {
+            return $row;
+        }
+        return false;
     }
-    
+
     public function getEmpleats($departamentId) {
         
     }
-    
-    public function modificarDepartament($id,$nom) {
-        
-    }
-    
-    public function modificarEmpleat($id,$nom,$departamentId) {
-        
-    }
-    
-    public function eliminarDepartament($id) {
-        
-    }
-    
-    public function eliminarEmpleat($id) {
-        
-    }
-    
-    public function modificarMultiple($data) {
+
+    public function modificarDepartament($id, $nom) {
         
     }
 
-    
+    public function modificarEmpleat($id, $nom, $departamentId) {
+        
+    }
+
+    public function eliminarDepartament($id) {
+        
+    }
+
+    public function eliminarEmpleat($id) {
+        
+    }
+
+    public function modificarMultiple($data) {
+        
+    }
 
 }

@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php foreach($departaments as $d): ?>
             <tr>
                 <td><?php echo $d["nom"] ?></td>
-                <td><?php echo $d["id"] ?></td>
+                <td><a class="btn btn-info" href="<?php echo site_url("welcome/detalls/".$d["id"]) ?>">Detalls</a></td>
                 <td><?php echo $d["id"] ?></td>
                 <td><?php echo $d["id"] ?></td>
             </tr>
