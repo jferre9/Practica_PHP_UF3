@@ -25,6 +25,11 @@ class Welcome extends CI_Controller {
         $this->load->view('template', $data);
     }
     
+    public function asd() {
+        echo "hola";
+        $this->load->view('welcome');
+    }
+    
     public function detalls($departamentId) {
         $driver = $this->session->driver;
         
