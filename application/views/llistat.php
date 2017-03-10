@@ -16,18 +16,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <tr>
                 <td><?php echo $d["nom"] ?></td>
                 <td><a class="btn btn-info" href="<?php echo site_url("welcome/detalls/".$d["id"]) ?>">Detalls</a></td>
-                <td><a class="btn btn-info" href="<?php echo site_url()."welcome/moddpt/".$d["id"] ?>">Modificar</a></td>
-                <td><a class="btn btn-danger" href="<?php echo site_url()."welcome/rmdpt/". $d["id"] ?>">Eliminar</a></td>
+                <td><a class="btn btn-info" href="<?php echo site_url()."/welcome/moddpt/".$d["id"] ?>">Modificar</a></td>
+                <td><a class="btn btn-danger" href="<?php echo site_url()."/welcome/rmdpt/". $d["id"] ?>">Eliminar</a></td>
             </tr>
             <?php endforeach;?>
         </tbody>
     </table>
     
     <h2>Crear Depratament</h2>
-    <form class="form-inline" method="post">
+    <form name="f1" class="form-inline" method="post">
         <label for="nom">Nom:</label>
         <input type="text" name="nom" class="form-control">
-        <input type="submit" class="btn btn-success">
+        <input type="submit" class="btn btn-success" value="Enviar">
     </form>
+    
+    
     
 </div>

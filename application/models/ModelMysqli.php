@@ -1,6 +1,8 @@
 <?php
 
-class ModelMysqli extends CI_Model {
+include_once APPPATH  .'interfaces/iPractica.php';
+
+class ModelMysqli extends CI_Model implements iPractica {
 
     private $conn;
 
@@ -34,9 +36,30 @@ class ModelMysqli extends CI_Model {
         }
         return false;
     }
+    
+    public function getEmpleat($empleatId) {
+        $stmt = $this->conn->prepare("Select * FROM empleat WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc())
+        {
+            return $row;
+        }
+        return false;
+    }
 
     public function getEmpleats($departamentId) {
-        
+        $empleats = array();
+        $stmt = $this->conn->prepare("Select * FROM empleat WHERE departament_id = ?");
+        $stmt->bind_param("i", $departamentId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc())
+        {
+            array_push($empleats, $row);
+        }
+        return $empleats;
     }
 
     public function modificarDepartament($id, $nom) {
