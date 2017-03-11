@@ -12,10 +12,10 @@ body {
   height: 100%;
 }
 .container table {
+  width: 100%;
   text-align: left;
 }
-#error {
+.error {
   margin-top: 20px;
   color: red;
 }
-/*# sourceMappingURL=estil.css.map */

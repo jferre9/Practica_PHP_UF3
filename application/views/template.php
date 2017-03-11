@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Welcome to CodeIgniter</title>
+        <title>Practica UF3</title>
         <link href="<?php echo base_url('public/estils/css/bootstrap.min.css') ?>" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo base_url('public/estils/css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('public/estils/estil.css') ?>">
@@ -27,10 +27,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li class="active"><a href="#">Home</a></li>
                         </ul>
                         <form class="navbar-form navbar-left" method="post" action="<?php echo site_url()."/welcome/driver"?>">
-                            <!--div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button-->
                             <label for="sel1" style="color: white">Driver:</label>
                             <select class="form-control" id="sel1" name="driver" onchange="this.form.submit()">
                                 <option value="ModelMysqli" <?php if ($driver === "ModelMysqli") echo "selected"?>>Mysqli</option>
@@ -39,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <option value="ModelOdbc" <?php if ($driver === "ModelOdbc") echo "selected"?>>Odbc</option>
                                 <option value="ModelOracle" <?php if ($driver === "ModelOracle") echo "selected"?>>Oracle</option>
                             </select>
-                            <input type="hidden" name="accio" value="<?php echo $this->router->method ?>">
+                            <input type="hidden" name="url" value="<?php echo uri_string() ?>">
                         </form>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 <?php
 
-class ModelPdo extends CI_Model {
+include_once APPPATH  .'interfaces/iPractica.php';
+
+class ModelPdo extends CI_Model implements iPractica {
 
     private $conn;
 
@@ -43,13 +45,13 @@ class ModelPdo extends CI_Model {
     }
 
     public function modificarEmpleat($id, $nom, $departamentId) {
-        $statement = $this->conn->prepare("UPDATE empleat set nom = :nom departament_id = :departament WHERE id = :id");
+        $statement = $this->conn->prepare("UPDATE empleat set nom = :nom, departament_id = :departament WHERE id = :id");
         $statement->execute(array('id'=>$id, 'nom'=>$nom,'departament'=>$departamentId));
     }
 
     public function eliminarDepartament($id) {
         $statement = $this->conn->prepare("DELETE FROM departament WHERE id = :id");
-        $statement->execute(array('id'=>$id));
+        return $statement->execute(array('id'=>$id));
     }
 
     public function eliminarEmpleat($id) {
@@ -57,11 +59,52 @@ class ModelPdo extends CI_Model {
         $statement->execute(array('id'=>$id));
     }
 
+    public function crearDepartament($nom) {
+        $statement = $this->conn->prepare("INSERT INTO departament (nom) VALUES (?)");
+        return $statement->execute(array($nom));
+    }
+
+    public function crearEmpleat($nom, $departamentId) {
+        $statement = $this->conn->prepare("INSERT INTO empleat (nom,departament_id) VALUES (?,?)");
+        return $statement->execute(array ($nom, $departamentId));
+    }
+
+    public function eliminarEmpleats($data) {
+        try {
+            $this->conn->beginTransaction();
+            $statement = $this->conn->prepare("DELETE FROM empleat WHERE id = ?");
+            foreach ($data as $key => $value) {
+                if (!$statement->execute(array($key)) || $statement->rowCount() != 1) throw new Exception ();
+            }
+            $this->conn->commit();
+            return true;
+        } catch (Exception $ex) {
+            $this->conn->rollback();
+            return false;
+        }
+    }
+
+    public function getEmpleat($empleatId) {
+        $statement = $this->conn->prepare("Select * FROM empleat WHERE id = ?");
+        $statement->execute(array($empleatId));
+        return $statement->fetch();
+    }
+
     public function modificarMultiple($data) {
-        $this->conn->beginTransaction();
-        
-        $this->conn->commit();
-        
+        try {
+            $this->conn->beginTransaction();
+            $statement = $this->conn->prepare("UPDATE empleat SET departament_id = ? WHERE id = ?");
+            foreach ($data as $key => $value) {
+                $id = $key;
+                $departamentId = $value;
+                if (!$statement->execute(array($departamentId,$id))) throw new Exception ();
+            }
+            $this->conn->commit();
+            return true;
+        } catch (Exception $ex) {
+            $this->conn->rollback();
+            return false;
+        }
     }
 
 }

@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="container">
+    <?php
+    if ($error) { 
+        echo "<div class='error'>$error</div>";
+    } ?>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -12,12 +16,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </tr>
         </thead>
         <tbody>
-            <?php foreach($departaments as $d): ?>
+            <?php foreach($departaments as $e): ?>
             <tr>
-                <td><?php echo $d["nom"] ?></td>
-                <td><a class="btn btn-info" href="<?php echo site_url("welcome/detalls/".$d["id"]) ?>">Detalls</a></td>
-                <td><a class="btn btn-info" href="<?php echo site_url()."/welcome/moddpt/".$d["id"] ?>">Modificar</a></td>
-                <td><a class="btn btn-danger" href="<?php echo site_url()."/welcome/rmdpt/". $d["id"] ?>">Eliminar</a></td>
+                <td><?php echo $e["nom"] ?></td>
+                <td><a class="btn btn-info" href="<?php echo site_url("welcome/detalls/".$e["id"]) ?>">Detalls</a></td>
+                <td><a class="btn btn-info" href="<?php echo site_url()."/welcome/moddpt/".$e["id"] ?>">Modificar</a></td>
+                <td><a class="btn btn-danger" href="<?php echo site_url()."/welcome/eliminardpt/". $e["id"] ?>">Eliminar</a></td>
             </tr>
             <?php endforeach;?>
         </tbody>

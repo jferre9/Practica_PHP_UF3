@@ -1,6 +1,8 @@
 <?php
 
-class ModelOdbc extends CI_Model {
+include_once APPPATH  .'interfaces/iPractica.php';
+
+class ModelOdbc extends CI_Model implements iPractica {
 
     private $conn;
 
@@ -22,7 +24,7 @@ class ModelOdbc extends CI_Model {
     }
 
     public function getDepartament($id) {
-        $stmt    = odbc_prepare($this->conn, 'Select d.*, count(e.id) as empleats FROM departament d LEFT JOIN empleat e ON e.departament_id = d.id WHERE d.id = ? GROUP BY d.id');
+        $stmt    = odbc_prepare($this->conn, 'Select * FROM departament WHERE id = ?');
         $result = odbc_execute($stmt, array($id));
         $departament = odbc_fetch_array($stmt);
         odbc_free_result($stmt);
@@ -40,11 +42,11 @@ class ModelOdbc extends CI_Model {
         return $empleats;
     }
 
-    public function modificarDepartament($id, $nom) {
+    public function crearDepartament($nom) {
         
     }
 
-    public function modificarEmpleat($id, $nom, $departamentId) {
+    public function crearEmpleat($nom, $departamentId) {
         
     }
 
@@ -53,6 +55,22 @@ class ModelOdbc extends CI_Model {
     }
 
     public function eliminarEmpleat($id) {
+        
+    }
+
+    public function eliminarEmpleats($data) {
+        
+    }
+
+    public function getEmpleat($empleatId) {
+        
+    }
+
+    public function modificarDepartament($id, $nom) {
+        
+    }
+
+    public function modificarEmpleat($id, $nom, $departamentId) {
         
     }
 
