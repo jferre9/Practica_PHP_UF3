@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="<?php echo site_url() ?>">Home</a></li>
                         </ul>
                         <form class="navbar-form navbar-left" method="post" action="<?php echo site_url()."/welcome/driver"?>">
                             <label for="sel1" style="color: white">Driver:</label>
