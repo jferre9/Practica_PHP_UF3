@@ -143,4 +143,13 @@ class ModelMysqli extends CI_Model implements iPractica {
         return $stmt->affected_rows == 1;
     }
 
+    public function tancar() {
+        try {
+            mysqli_close($this->conn);
+        } catch (Exception $ex) {
+
+        }
+        
+    }
+
 }

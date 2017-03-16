@@ -29,6 +29,7 @@ class Welcome extends CI_Controller {
         $data["driver"] = $driver;
         $data["vista"] = 'llistat';
         $this->load->view('template', $data);
+        $this->$driver->tancar();
     }
     
     public function moddpt($departamentId) {
@@ -52,6 +53,7 @@ class Welcome extends CI_Controller {
         $data["driver"] = $driver;
         $data["vista"] = 'moddpt';
         $this->load->view('template', $data);
+        $this->$driver->tancar();
     }
     
     public function modemp($empleatId) {
@@ -77,7 +79,7 @@ class Welcome extends CI_Controller {
         $data["driver"] = $driver;
         $data["vista"] = 'modemp';
         $this->load->view('template', $data);
-        
+        $this->$driver->tancar();
     }
 
     
@@ -103,10 +105,8 @@ class Welcome extends CI_Controller {
             }
         } else if (isset ($post["eliminar"]) && isset ($post["empleat"])) {
             $res = $this->$driver->eliminarEmpleats($post["empleat"]);
-            var_dump($res);
         } else if (isset ($post["canviar"]) && isset ($post["departament"])) {
             $res = $this->$driver->modificarMultiple($post["departament"]);
-            var_dump($res);
         }
         
         
@@ -155,6 +155,7 @@ class Welcome extends CI_Controller {
         $this->$driver->eliminarEmpleat($empleatId);
         
         redirect("welcome/detalls/".$empleat["departament_id"]);
+        $this->$driver->tancar();
     }
 
 

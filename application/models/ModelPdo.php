@@ -17,7 +17,6 @@ class ModelPdo extends CI_Model implements iPractica {
             $this->conn = new PDO($dsn, $user, $password);
         } catch (PDOException $e) {
             die('Connection failed: ' . $e->getMessage());
-            //print_r($this->conn->errorInfo());
         }
     }
 
@@ -105,6 +104,10 @@ class ModelPdo extends CI_Model implements iPractica {
             $this->conn->rollback();
             return false;
         }
+    }
+
+    public function tancar() {
+        $this->conn = NULL;
     }
 
 }

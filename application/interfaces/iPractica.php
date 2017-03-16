@@ -26,5 +26,7 @@ interface iPractica {
     public function eliminarEmpleat($id);
 
     public function modificarMultiple($data);
+    
+    public function tancar();
 
 }

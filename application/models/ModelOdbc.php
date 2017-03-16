@@ -121,4 +121,8 @@ class ModelOdbc extends CI_Model implements iPractica {
         }
     }
 
+    public function tancar() {
+        odbc_close($this->conn);
+    }
+
 }

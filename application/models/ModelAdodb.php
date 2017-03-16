@@ -11,7 +11,7 @@ class ModelAdodb extends CI_Model implements iPractica {
         // Call the CI_Model constructor
         parent::__construct();
         $this->conn = ADONewConnection('mysqli');
-        $this->conn->PConnect('localhost', 'root', '', 'practica_php_uf3');
+        $this->conn->PConnect('127.0.0.1', 'root', '', 'practica_php_uf3');
     }
 
     public function getDepartaments() {
@@ -103,4 +103,13 @@ class ModelAdodb extends CI_Model implements iPractica {
             return false;
         }
     }
+
+    public function tancar() {
+        try {
+            $this->conn->Close();
+        } catch (Exception $ex) {
+
+        }
+    }
+
 }
